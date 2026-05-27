@@ -1,5 +1,5 @@
 (function () {
-  const current = location.pathname.split("/").pop() || "index.html";
+  const current = location.pathname.split("/").pop() || "home.html";
   let host = document.getElementById("navbar");
   if (!host) {
     host = document.createElement("nav");
@@ -7,7 +7,26 @@
     document.body.insertBefore(host, document.body.firstChild);
   }
 
-  const FALLBACK_MARKUP = `\n<div class="navbar">\n  <a class="nav-logo" href="index.html" aria-label="Rate My Setup">\n    <span class="logo-mark">🎛️</span>\n    <span class="logo-text">RATE MY SETUP</span>\n  </a>\n  <input type="checkbox" id="nav-toggle" />\n  <label class="nav-burger" for="nav-toggle" aria-label="Toggle navigation">\n    <span></span><span></span><span></span>\n  </label>\n  <div class="nav-links">\n    <a href="index.html">Home</a>\n    <a href="explore.html">Explore</a>\n    <a href="top-rated.html">Top Rated</a>\n    <a href="categories.html">Categories</a>\n  </div>\n  <div class="nav-actions">\n    <input class="nav-search" placeholder="Search setups..." aria-label="Search setups" />\n    <a class="btn upload" href="upload.html">+ Add Setup</a>\n    <a class="btn login" href="login.html">Login</a>\n  </div>\n</div>`;
+  const FALLBACK_MARKUP = `
+<div class="navbar">
+  <a class="nav-logo" href="home.html" aria-label="Rate My Setup">
+    <span class="logo-mark"></span>
+    <span class="logo-text">RATE MY SETUP</span>
+  </a>
+  <input type="checkbox" id="nav-toggle" />
+  <label class="nav-burger" for="nav-toggle" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </label>
+  <div class="nav-links">
+    <a href="home.html">Home</a>
+    <a href="explore.html">Explore</a>
+  </div>
+  <div class="nav-actions">
+    <input class="nav-search" placeholder="Search setups..." aria-label="Search setups" />
+    <a class="btn upload" href="upload.html">+ Add Setup</a>
+    <a class="btn login" href="login.html">Login</a>
+  </div>
+</div>`;
 
   function setActive() {
     const links = host.querySelectorAll(".nav-links a");
