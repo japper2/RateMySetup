@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Upload - RateMySetup</title>
+    <link rel="stylesheet" href="../../style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="home.html">Home</a> | <a href="explore.html">Explore</a> |
+        <a href="login.html">Login</a> |
+        <a href="register.html">Register</a>
+      </nav>
+      <h1>Upload</h1>
+    </header>
+    <main>
+      <form method="post" action="#" enctype="multipart/form-data">
+        <label>
+          Title:<br />
+          <input type="text" name="title" placeholder="Setup title" />
+        </label>
+        <br />
+        <label>
+          Image:<br />
+          <input type="file" name="image" />
+        </label>
+        <br />
+        <label>
+          Description:<br />
+          <textarea
+            name="description"
+            rows="4"
+            cols="40"
+            placeholder="Describe your setup"
+          ></textarea>
+        </label>
+        <br />
+        <button type="submit">Upload</button>
+      </form>
+    </main>
+    <footer>
+      <small>&copy; RateMySetup</small>
+    </footer>
+  </body>
+</html>
