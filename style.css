@@ -261,8 +261,23 @@ button, input, textarea, select { font: inherit; }
 }
 
 .profile-upload-form {
-  margin-top: 22px;
+  margin: 34px auto 0;
   text-align: left;
+  width: min(100%, 680px);
+}
+
+.profile-upload-title {
+  margin-bottom: 12px;
+}
+
+.profile-upload-form .file-picker {
+  margin-bottom: 30px;
+}
+
+.profile-upload-form .btn.primary {
+  display: flex;
+  margin: 30px auto 0;
+  width: fit-content;
 }
 
 .category-filter-row {
@@ -285,7 +300,7 @@ button, input, textarea, select { font: inherit; }
   align-items: center;
   gap: 16px;
   padding: 16px;
-  margin-bottom: 18px;
+  margin-bottom: 26px;
   border: 1px dashed rgba(255,255,255,.22);
   border-radius: 14px;
   background: rgba(10,15,25,.72);
@@ -330,4 +345,50 @@ button, input, textarea, select { font: inherit; }
   opacity: 0;
   overflow: hidden;
   pointer-events: none;
+}
+
+
+.profile-upload-form .btn.primary {
+  margin-top: 24px;
+}
+
+.owner-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin: -4px 0 14px;
+}
+
+.delete-setup-btn {
+  border: 1px solid rgba(255, 95, 95, .35);
+  background: rgba(255, 95, 95, .08);
+  color: #ff9b9b;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.delete-setup-btn:hover {
+  border-color: rgba(255, 95, 95, .7);
+  background: rgba(255, 95, 95, .16);
+  transform: translateY(-1px);
+}
+
+
+/* Prevent horizontal scrolling on form/upload pages */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.upload-page .form-page {
+  width: min(620px, calc(100vw - 40px));
+  max-width: 620px;
+}
+
+.upload-page .form-card,
+.upload-page .field,
+.upload-page .file-picker {
+  max-width: 100%;
 }

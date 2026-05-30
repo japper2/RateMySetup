@@ -14,7 +14,7 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
   <link rel="stylesheet" href="../style.css">
 </head>
 
-<body data-loggedin="<?= $navLoggedIn ? 'true' : 'false' ?>" data-username="<?= htmlspecialchars($navName) ?>" data-profileimage="<?= htmlspecialchars($navProfileImage) ?>">
+<body class="upload-page" data-loggedin="<?= $navLoggedIn ? 'true' : 'false' ?>" data-username="<?= htmlspecialchars($navName) ?>" data-profileimage="<?= htmlspecialchars($navProfileImage) ?>">
   <header>
     <nav id="navbar"></nav>
   </header>
@@ -39,10 +39,25 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
         </select>
       </label>
 
-      <label class="field">
-        Image
-        <input type="file" name="image" accept="image/*" required>
-      </label>
+      <div class="field">
+        <span>Image</span>
+
+        <label class="file-picker" for="setupImageInput">
+          <span>
+            <strong>Choose image</strong>
+            <small id="selectedSetupImageName">PNG, JPG or WebP</small>
+          </span>
+        </label>
+
+        <input
+          id="setupImageInput"
+          class="visually-hidden-file"
+          type="file"
+          name="image"
+          accept="image/*"
+          required
+        >
+      </div>
 
       <label class="field">
         Description
@@ -56,6 +71,14 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
   <script src="../js/nav.js"></script>
 
   <script>
+    const setupImageInput = document.getElementById("setupImageInput");
+    const selectedSetupImageName = document.getElementById("selectedSetupImageName");
+
+    setupImageInput.addEventListener("change", function () {
+      const file = this.files[0];
+      selectedSetupImageName.textContent = file ? file.name : "PNG, JPG or WebP";
+    });
+
     document.getElementById("uploadForm").addEventListener("submit", async function (e) {
       e.preventDefault();
 

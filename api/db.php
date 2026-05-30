@@ -14,8 +14,6 @@ try {
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         ]
     );
-
-    // Small safe migrations for existing school-project databases.
     try {
         $stmt = $pdo->query("SHOW COLUMNS FROM users LIKE 'profile_image'");
         if (!$stmt->fetch()) {

@@ -50,4 +50,16 @@
         </div>
       </div>
     </div>`;
+
+
+  const searchInput = navbar.querySelector('.search');
+  if (searchInput && !document.querySelector('[data-setups-list]')) {
+    searchInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        const query = searchInput.value.trim();
+        window.location.href = query ? `explore.php?search=${encodeURIComponent(query)}` : 'explore.php';
+      }
+    });
+  }
 })();

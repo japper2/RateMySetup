@@ -1,8 +1,10 @@
 const state = {
   loggedIn: false,
+  userId: null,
   userName: null,
   order: 'latest',
-  category: ''
+  category: '',
+  search: ''
 };
 
 function escapeHtml(value) {
@@ -58,9 +60,11 @@ async function loadSession() {
     const response = await fetch('../api/me.php');
     const data = await response.json();
     state.loggedIn = Boolean(data.logged_in);
+    state.userId = data.user_id ? Number(data.user_id) : null;
     state.userName = data.name || null;
   } catch (_) {
     state.loggedIn = false;
+    state.userId = null;
   }
 }
 
@@ -82,18 +86,30 @@ async function loadSetups(order = state.order, options = {}) {
 
   const params = new URLSearchParams({ order: state.order });
   if (state.category) params.set('category', state.category);
+  if (state.search) params.set('search', state.search);
 
-  const response = await fetch(`../api/get_setups.php?${params.toString()}`);
-  const data = await response.json();
+  let data;
+
+  try {
+    const response = await fetch(`../api/get_setups.php?${params.toString()}`);
+    const text = await response.text();
+    data = JSON.parse(text);
+  } catch (error) {
+    console.error('Search/load error:', error);
+    list.innerHTML = '<p class="desc">Could not load setups. Check the console for details.</p>';
+    return;
+  }
 
   if (!data.success) {
-    list.innerHTML = '<p class="desc">Could not load setups.</p>';
+    console.error('API error:', data);
+    list.innerHTML = `<p class="desc">${escapeHtml(data.message || 'Could not load setups.')}</p>`;
     return;
   }
 
   if (!data.setups.length) {
     const label = state.category ? ` in ${escapeHtml(state.category)}` : '';
-    list.innerHTML = `<p class="desc">No setups found${label}.</p>`;
+    const searchLabel = state.search ? ` for "${escapeHtml(state.search)}"` : '';
+    list.innerHTML = `<p class="desc">No setups found${label}${searchLabel}.</p>`;
     return;
   }
 
@@ -117,6 +133,10 @@ function renderSetupCard(setup) {
   const myRating = setup.my_rating ? Number(setup.my_rating) : 0;
   const category = setup.category || 'General';
   const likedClass = Number(setup.liked_by_me) ? 'liked' : '';
+  const isOwner = state.loggedIn && Number(setup.user_id) === Number(state.userId);
+  const ownerActions = isOwner
+    ? `<div class="owner-actions"><button class="delete-setup-btn" onclick="deleteSetup(${setup.id})">Delete post</button></div>`
+    : '';
 
   return `
     <article class="setup-card" data-setup-id="${setup.id}">
@@ -134,6 +154,8 @@ function renderSetupCard(setup) {
         </div>
 
         <p class="desc">${escapeHtml(setup.description)}</p>
+
+        ${ownerActions}
 
         <div class="stats action-stats">
           <button class="stat-button" onclick="toggleRatingPanel(${setup.id})">★ ${rating}</button>
@@ -157,6 +179,16 @@ function renderSetupCard(setup) {
       </div>
     </article>
   `;
+}
+
+async function deleteSetup(setupId) {
+  if (!confirm('Delete this setup? This cannot be undone.')) return;
+
+  const result = await apiPost('../api/delete_setup.php', { setup_id: setupId });
+
+  if (result) {
+    await loadSetups(state.order, { preserveScroll: true });
+  }
 }
 
 function toggleRatingPanel(setupId) {
@@ -235,6 +267,15 @@ function filterCategory(category) {
   loadSetups(state.order, { preserveScroll: true, category });
 }
 
+
+function debounce(callback, delay = 250) {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => callback(...args), delay);
+  };
+}
+
 function clearCategory() {
   state.category = '';
   setActiveCategory('');
@@ -242,6 +283,14 @@ function clearCategory() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  const searchInput = document.querySelector('.search');
+  const urlSearch = new URLSearchParams(window.location.search).get('search') || '';
+
+  if (searchInput && urlSearch) {
+    searchInput.value = urlSearch;
+    state.search = urlSearch.trim();
+  }
+
   await loadSession();
   await loadSetups();
 
@@ -258,6 +307,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       filterCategory(button.dataset.category);
     });
   });
+
+  if (searchInput) {
+    const runSearch = debounce(() => {
+      state.search = searchInput.value.trim();
+      loadSetups(state.order, { preserveScroll: true });
+    }, 200);
+
+    searchInput.addEventListener('input', runSearch);
+    searchInput.addEventListener('search', runSearch);
+    searchInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        state.search = searchInput.value.trim();
+        loadSetups(state.order, { preserveScroll: true });
+      }
+    });
+  }
 
   const clearButton = document.querySelector('[data-clear-category]');
   if (clearButton) clearButton.addEventListener('click', clearCategory);
