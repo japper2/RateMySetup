@@ -78,10 +78,10 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
     <div class="container footer-inner">
       <strong>RATE MY SETUP</strong>
       <div class="footer-links">
-        <a>About</a>
-        <a>Contact</a>
-        <a>Privacy Policy</a>
-        <a>Terms of Service</a>
+        <a href="about.php">About</a>
+        <a href="contact.php">Contact</a>
+        <a href="privacy.php">Privacy Policy</a>
+        <a href="termsofservice.php">Terms of Service</a>
       </div>
     </div>
   </footer>

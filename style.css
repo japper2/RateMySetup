@@ -80,7 +80,7 @@ button, input, textarea, select { font: inherit; }
 .tag { color: #c37cff; background: rgba(155,77,255,.18); border-radius: 999px; padding: 4px 9px; font-size: .84rem; }
 .desc { color: var(--muted); margin-bottom: 18px; }
 .stats { display: flex; gap: 28px; color: #c4cad5; }
-.more { display: block; width: 240px; margin: 22px auto 0; }
+.more { display: flex; width: 240px; margin: 22px auto 0; }
 .category-list { display: grid; }
 .category { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); padding: 17px 0; color: #dce1ea; }
 .category small { color: var(--muted); font-size: .95rem; }
