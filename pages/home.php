@@ -81,7 +81,7 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
         <a href="privacy.html">Privacy Policy</a>
-        <a href="termsofservice.html">Terms of Service</a>
+        <a href="tos.html">Terms of Service</a>
       </div>
     </div>
   </footer>
