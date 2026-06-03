@@ -1,0 +1,16 @@
+RewriteEngine On
+RewriteBase /github/RateMySetup/
+
+
+
+# Query strings met ? 
+RewriteRule ^home/?$ pages/home.php [L,QSA]
+RewriteRule ^explore/?$ pages/explore.php [L,QSA]
+RewriteRule ^login/?$ pages/login.php [L,QSA]
+RewriteRule ^register/?$ pages/register.php [L,QSA]
+RewriteRule ^upload/?$ pages/upload.php [L,QSA]
+RewriteRule ^profile/?$ pages/profile.php [L,QSA]
+RewriteRule ^about/?$ pages/about.php [L,QSA]
+RewriteRule ^contact/?$ pages/contact.php [L,QSA]
+RewriteRule ^privacy/?$ pages/privacy.php [L,QSA]
+RewriteRule ^terms/?$ pages/tos.php [L,QSA]

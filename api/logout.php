@@ -2,5 +2,5 @@
 session_start();
 $_SESSION = [];
 session_destroy();
-header("Location: ../pages/login.php");
+header("Location: /github/RateMySetup/login");
 exit;

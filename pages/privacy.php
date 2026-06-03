@@ -11,7 +11,7 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy</title>
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="/github/RateMySetup/style.css">
 </head>
 
 <body data-loggedin="<?= $navLoggedIn ? 'true' : 'false' ?>" data-username="<?= htmlspecialchars($navName) ?>" data-profileimage="<?= htmlspecialchars($navProfileImage) ?>">
@@ -47,8 +47,8 @@ You can stop using the service any time. If you want your account removed, conta
       </div>
     </section>
 
-  <script src="../js/nav.js"></script>
-  <script src="../js/setups.js"></script>
+  <script src="/github/RateMySetup/js/nav.js"></script>
+  <script src="/github/RateMySetup/js/setups.js"></script>
 </body>
 
 </html>

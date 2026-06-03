@@ -11,7 +11,7 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="/github/RateMySetup/style.css">
 </head>
 
 <body data-loggedin="<?= $navLoggedIn ? 'true' : 'false' ?>" data-username="<?= htmlspecialchars($navName) ?>" data-profileimage="<?= htmlspecialchars($navProfileImage) ?>">
@@ -36,12 +36,12 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
       <button class="btn primary" type="submit">Log in</button>
 
       <p class="desc" style="margin-top:16px">
-        No account? <a href="register.php">Register here</a>.
+        No account? <a href="/github/RateMySetup/register">Register here</a>.
       </p>
     </form>
   </main>
 
-  <script src="../js/nav.js"></script>
+  <script src="/github/RateMySetup/js/nav.js"></script>
 
   <script>
     document.getElementById("loginForm").addEventListener("submit", async function (e) {
@@ -49,7 +49,7 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
 
       const formData = new FormData(this);
 
-      const response = await fetch("../api/login.php", {
+      const response = await fetch("/github/RateMySetup/api/login.php", {
         method: "POST",
         body: formData
       });
@@ -57,7 +57,7 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
       const data = await response.json();
 
       if (data.success) {
-        window.location.href = "home.php";
+        window.location.href = "/github/RateMySetup/home";
       } else {
         alert(data.message);
       }
