@@ -57,9 +57,14 @@ select {
   margin: 0 auto;
 }
 .navbar {
-  position: fixed; top: 0; z-index: 20; width: 100%;
-  height: 78px; border-bottom: 1px solid var(--line);
-  background: rgba(7, 11, 18, .78); backdrop-filter: blur(16px);
+  position: fixed;
+  top: 0;
+  z-index: 20;
+  width: 100%;
+  height: 78px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(7, 11, 18, 0.78);
+  backdrop-filter: blur(16px);
 }
 .nav-inner {
   height: 100%;
@@ -738,7 +743,6 @@ select {
   transform: translateY(-1px);
 }
 
-/* Prevent horizontal scrolling on form/upload pages */
 html,
 body {
   max-width: 100%;
