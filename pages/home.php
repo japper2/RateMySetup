@@ -76,7 +76,7 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
 
   <footer class="footer">
     <div class="container footer-inner">
-      <strong>RATE MY SETUP</strong>
+      <a href="home.html"><strong>RATE MY SETUP</strong></a>
       <div class="footer-links">
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
