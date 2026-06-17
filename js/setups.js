@@ -1,5 +1,3 @@
-const BASE_URL = '/github/RateMySetup';
-
 const state = {
   loggedIn: false,
   userId: null,
@@ -19,9 +17,8 @@ function escapeHtml(value) {
 }
 
 function imageSrc(path) {
-  if (!path) return BASE_URL + '/assets/setup-preview.png';
-  if (path.startsWith('http')) return path;
-  return BASE_URL + '/' + path.replace(/^\.\.\//, '').replace(/^\//, '');
+  if (!path) return '../assets/setup-preview.png';
+  return path.startsWith('uploads/') || path.startsWith('assets/') ? `../${path}` : `../${path}`;
 }
 
 function userAvatarMarkup(name, imagePath, className = 'user-avatar') {
@@ -46,7 +43,7 @@ async function apiPost(url, data) {
 
   if (response.status === 401) {
     alert(result.message || 'You must be logged in first');
-    window.location.href = BASE_URL + '/login';
+    window.location.href = 'login.php';
     return null;
   }
 
@@ -60,7 +57,7 @@ async function apiPost(url, data) {
 
 async function loadSession() {
   try {
-    const response = await fetch(BASE_URL + '/api/me.php');
+    const response = await fetch('../api/me.php');
     const data = await response.json();
     state.loggedIn = Boolean(data.logged_in);
     state.userId = data.user_id ? Number(data.user_id) : null;
@@ -94,7 +91,7 @@ async function loadSetups(order = state.order, options = {}) {
   let data;
 
   try {
-    const response = await fetch(BASE_URL + `/api/get_setups.php?${params.toString()}`);
+    const response = await fetch(`../api/get_setups.php?${params.toString()}`);
     const text = await response.text();
     data = JSON.parse(text);
   } catch (error) {
@@ -187,7 +184,7 @@ function renderSetupCard(setup) {
 async function deleteSetup(setupId) {
   if (!confirm('Delete this setup? This cannot be undone.')) return;
 
-  const result = await apiPost(BASE_URL + '/api/delete_setup.php', { setup_id: setupId });
+  const result = await apiPost('../api/delete_setup.php', { setup_id: setupId });
 
   if (result) {
     await loadSetups(state.order, { preserveScroll: true });
@@ -200,12 +197,12 @@ function toggleRatingPanel(setupId) {
 }
 
 async function rateSetup(setupId, score) {
-  const result = await apiPost(BASE_URL + '/api/rate_setup.php', { setup_id: setupId, score });
+  const result = await apiPost('../api/rate_setup.php', { setup_id: setupId, score });
   if (result) await loadSetups(state.order, { preserveScroll: true });
 }
 
 async function likeSetup(setupId) {
-  const result = await apiPost(BASE_URL + '/api/like_setup.php', { setup_id: setupId });
+  const result = await apiPost('../api/like_setup.php', { setup_id: setupId });
   if (result) await loadSetups(state.order, { preserveScroll: true });
 }
 
@@ -224,7 +221,7 @@ async function loadComments(setupId) {
 
   target.innerHTML = '<p class="desc">Loading comments...</p>';
 
-  const response = await fetch(BASE_URL + `/api/get_comments.php?setup_id=${setupId}`);
+  const response = await fetch(`../api/get_comments.php?setup_id=${setupId}`);
   const data = await response.json();
 
   if (!data.success || !data.comments.length) {
@@ -244,7 +241,7 @@ async function submitComment(event, setupId) {
   event.preventDefault();
 
   const input = event.target.elements.comment;
-  const result = await apiPost(BASE_URL + '/api/add_comment.php', {
+  const result = await apiPost('../api/add_comment.php', {
     setup_id: setupId,
     comment: input.value
   });
@@ -287,8 +284,7 @@ function clearCategory() {
 
 document.addEventListener('DOMContentLoaded', async () => {
   const searchInput = document.querySelector('.search');
-  const urlParams = new URLSearchParams(window.location.search);
-  const urlSearch = urlParams.get('q') || urlParams.get('search') || '';
+  const urlSearch = new URLSearchParams(window.location.search).get('search') || '';
 
   if (searchInput && urlSearch) {
     searchInput.value = urlSearch;

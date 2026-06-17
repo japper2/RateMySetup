@@ -1,3 +1,3 @@
 <?php
-header("Location: /github/RateMySetup/home");
+header("Location: pages/home.php");
 exit;

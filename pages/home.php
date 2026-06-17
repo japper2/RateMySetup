@@ -11,7 +11,7 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rate My Setup</title>
-  <link rel="stylesheet" href="/github/RateMySetup/style.css">
+  <link rel="stylesheet" href="../style.css">
 </head>
 
 <body data-loggedin="<?= $navLoggedIn ? 'true' : 'false' ?>" data-username="<?= htmlspecialchars($navName) ?>" data-profileimage="<?= htmlspecialchars($navProfileImage) ?>">
@@ -27,8 +27,8 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
             <h1>Show off your setup.<br>Get <span>rated</span> by the community.</h1>
             <p>Join creators sharing their desk, gaming and productivity setups. Rate, like and comment on real uploads.</p>
             <div class="hero-actions">
-              <a class="btn primary" href="/github/RateMySetup/upload">↑ Add Your Setup</a>
-              <a class="btn" href="/github/RateMySetup/explore">Explore Setups</a>
+              <a class="btn primary" href="upload.php">↑ Add Your Setup</a>
+              <a class="btn" href="explore.php">Explore Setups</a>
             </div>
           </div>
         </section>
@@ -45,7 +45,7 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
 
           <div class="cards" data-setups-list></div>
 
-          <a class="btn more" href="/github/RateMySetup/explore">View More Setups</a>
+          <a class="btn more" href="explore.php">View More Setups</a>
         </section>
       </div>
 
@@ -76,18 +76,18 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
 
   <footer class="footer">
     <div class="container footer-inner">
-      <a href="/github/RateMySetup/home"><strong>RATE MY SETUP</strong></a>
+      <a href="home.html"><strong>RATE MY SETUP</strong></a>
       <div class="footer-links">
-        <a href="/github/RateMySetup/about">About</a>
-        <a href="/github/RateMySetup/contact">Contact</a>
-        <a href="/github/RateMySetup/privacy">Privacy Policy</a>
-        <a href="/github/RateMySetup/terms">Terms of Service</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="tos.html">Terms of Service</a>
       </div>
     </div>
   </footer>
 
-  <script src="/github/RateMySetup/js/nav.js"></script>
-  <script src="/github/RateMySetup/js/setups.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/setups.js"></script>
 </body>
 
 </html>

@@ -11,7 +11,7 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About us</title>
-  <link rel="stylesheet" href="/github/RateMySetup/style.css">
+  <link rel="stylesheet" href="../style.css">
 </head>
 
 <body data-loggedin="<?= $navLoggedIn ? 'true' : 'false' ?>" data-username="<?= htmlspecialchars($navName) ?>" data-profileimage="<?= htmlspecialchars($navProfileImage) ?>">
@@ -31,8 +31,8 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
 
 
 
-  <script src="/github/RateMySetup/js/nav.js"></script>
-  <script src="/github/RateMySetup/js/setups.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/setups.js"></script>
 </body>
 
 </html>

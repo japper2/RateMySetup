@@ -5,7 +5,7 @@ require "../api/auth.php";
 $userId = currentUserId();
 
 if (!$userId) {
-    header("Location: /github/RateMySetup/login");
+    header("Location: login.php");
     exit;
 }
 
@@ -14,7 +14,7 @@ $stmt->execute([$userId]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$user) {
-    header("Location: /github/RateMySetup/login");
+    header("Location: login.php");
     exit;
 }
 
@@ -32,7 +32,7 @@ $navProfileImage = $profileImage ?? "";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile</title>
-  <link rel="stylesheet" href="/github/RateMySetup/style.css">
+  <link rel="stylesheet" href="../style.css">
 </head>
 
 <body data-loggedin="true" data-username="<?= htmlspecialchars($navName) ?>" data-profileimage="<?= htmlspecialchars($navProfileImage) ?>">
@@ -43,7 +43,7 @@ $navProfileImage = $profileImage ?? "";
   <main class="form-page">
     <section class="panel form-card profile-card">
       <?php if ($profileImage): ?>
-        <div class="profile-avatar profile-avatar-image" style="background-image:url('/github/RateMySetup/<?= htmlspecialchars($profileImage) ?>')"></div>
+        <div class="profile-avatar profile-avatar-image" style="background-image:url('../<?= htmlspecialchars($profileImage) ?>')"></div>
       <?php else: ?>
         <div class="profile-avatar">
           <?= htmlspecialchars(strtoupper(substr($name, 0, 1))) ?>
@@ -80,13 +80,13 @@ $navProfileImage = $profileImage ?? "";
       </form>
 
       <div class="profile-actions">
-        <a class="btn primary" href="/github/RateMySetup/upload">+ Add Setup</a>
-        <a class="btn" href="/github/RateMySetup/api/logout.php">Log out</a>
+        <a class="btn primary" href="upload.php">+ Add Setup</a>
+        <a class="btn" href="../api/logout.php">Log out</a>
       </div>
     </section>
   </main>
 
-  <script src="/github/RateMySetup/js/nav.js"></script>
+  <script src="../js/nav.js"></script>
 
   <script>
     const imageInput = document.getElementById('profileImageInput');
@@ -111,7 +111,7 @@ $navProfileImage = $profileImage ?? "";
 
       const formData = new FormData(this);
 
-      const response = await fetch('/github/RateMySetup/api/upload_profile_picture.php', {
+      const response = await fetch('../api/upload_profile_picture.php', {
         method: 'POST',
         body: formData
       });

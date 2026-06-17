@@ -7,7 +7,7 @@ try {
     $userId = currentUserId() ?? 0;
     $order = $_GET["order"] ?? "latest";
     $category = trim($_GET["category"] ?? "");
-    $search = trim($_GET["q"] ?? ($_GET["search"] ?? ""));
+    $search = trim($_GET["search"] ?? "");
 
     $columnStmt = $pdo->prepare("SHOW COLUMNS FROM setups LIKE 'category'");
     $columnStmt->execute();

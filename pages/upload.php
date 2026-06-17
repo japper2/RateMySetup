@@ -11,7 +11,7 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Setup</title>
-  <link rel="stylesheet" href="/github/RateMySetup/style.css">
+  <link rel="stylesheet" href="../style.css">
 </head>
 
 <body class="upload-page" data-loggedin="<?= $navLoggedIn ? 'true' : 'false' ?>" data-username="<?= htmlspecialchars($navName) ?>" data-profileimage="<?= htmlspecialchars($navProfileImage) ?>">
@@ -68,7 +68,7 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
     </form>
   </main>
 
-  <script src="/github/RateMySetup/js/nav.js"></script>
+  <script src="../js/nav.js"></script>
 
   <script>
     const setupImageInput = document.getElementById("setupImageInput");
@@ -84,7 +84,7 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
 
       const formData = new FormData(this);
 
-      const response = await fetch("/github/RateMySetup/api/upload_setup.php", {
+      const response = await fetch("../api/upload_setup.php", {
         method: "POST",
         body: formData
       });
@@ -93,12 +93,12 @@ $navProfileImage = $_SESSION["profile_image"] ?? "";
 
       if (response.status === 401) {
         alert(data.message);
-        window.location.href = "/github/RateMySetup/login";
+        window.location.href = "login.php";
         return;
       }
 
       if (data.success) {
-        window.location.href = "/github/RateMySetup/home";
+        window.location.href = "home.php";
       } else {
         alert(data.message);
       }
